@@ -1,5 +1,10 @@
 planeVersion: v1.4.0
 
+# Extra annotations for the workload ServiceAccount (e.g. GKE Workload Identity
+# binding: iam.gke.io/gcp-service-account: <gsa>@<project>.iam.gserviceaccount.com).
+serviceAccount:
+  annotations: {}
+
 dockerRegistry:
   enabled: false
   host: "index.docker.io/v1/"

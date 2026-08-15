@@ -24,5 +24,15 @@ stringData:
   AWS_S3_ENDPOINT_URL: {{ .Values.env.aws_s3_endpoint_url | quote }}
   AWS_REGION: {{ .Values.env.aws_region | default "" | quote  }}
   {{- end }}
+  {{- if .Values.env.use_gcs }}
+  # Native Google Cloud Storage; keyless via Workload Identity (no creds here).
+  # The backend signs URLs through IAM signBlob using the pod's bound service
+  # account, so only the toggle + bucket/project are needed.
+  USE_GCS: "1"
+  GS_BUCKET_NAME: {{ .Values.env.docstore_bucket | default "" | quote }}
+  {{- if .Values.env.gs_project_id }}
+  GS_PROJECT_ID: {{ .Values.env.gs_project_id | quote }}
+  {{- end }}
+  {{- end }}
 ---
 {{- end }}
